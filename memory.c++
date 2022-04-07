@@ -14,22 +14,29 @@ template <typename T>
 void print(T array){
     std::cout << array << std::endl;
 }
-void poll_stdin(){
+void poll_stdin(bool* quit){
     SDL_Event e;
-    print<string>("here");
-while (true)
-    {
+    // print<int>(*quit);
+    
+
         // print(SDL_PollEvent(&e));
         while (SDL_PollEvent(&e) != 0) {
             print("event happened");
-            if(e.type == SDL_KEYDOWN)
+            if(e.type == SDL_KEYDOWN){
                 cout << "The key you pressed was " << SDL_GetKeyName(e.key.keysym.sym) <<endl;
+            }
+            if( e.type == SDL_QUIT )
+                    {
+                        *quit = true;
+                    }
+                
         }
-    }
+    
 }
 void outer_loop(){
     auto start = std::chrono::high_resolution_clock::now();
-    while (true){
+    bool quit = false;
+    while (!quit){
         
         auto elapsed = std::chrono::high_resolution_clock::now() - start;
 
@@ -38,7 +45,7 @@ void outer_loop(){
         if (microseconds % 1000000 == 0){
             // print<char*>("tick");
             // break;
-            poll_stdin();
+            poll_stdin(&quit);
         }
     }
     
@@ -98,6 +105,7 @@ int main()
     //Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+
 //The window we'll be rendering to
     SDL_Window* window = NULL;
     
@@ -108,7 +116,8 @@ const int SCREEN_HEIGHT = 480;
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
         printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
-    }else
+    }
+    else
     {
         //Create window
         window = SDL_CreateWindow( "BytePusher", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
