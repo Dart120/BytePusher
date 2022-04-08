@@ -52,7 +52,8 @@ void pointer_memory_flip(int position,int bit_to_change){
     char* actual_pointer = pointer + added_pointer;
     *actual_pointer |= 1UL << bit;
 }
-char* read_memory(int position, int bytes){
+// The number at a position
+int read_memory(int position, int bytes){
     int acc = 0;
     for (int i = 0;i < bytes;i++){
         int shift = (bytes - 1 - i) * 8;
@@ -60,7 +61,16 @@ char* read_memory(int position, int bytes){
         // print((int)memory[position + i]);
         acc += (unsigned char) memory[position + i] << shift;
     }
-    return memory + acc;
+    return acc;
+}
+int bytepush(int source, int dest){
+    char A = memory[source];
+    char* B = memory + dest;
+    *B = A;
+    return 1;
+}
+void copy(int source, int dest){
+    
 }
 // int main(){
 //     *memory = 0;

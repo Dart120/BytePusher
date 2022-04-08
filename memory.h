@@ -1,6 +1,8 @@
-#ifndef POLL_STDIN
-#define POLL_STDIN
+#ifndef MEMORY_H
+#define MEMORY_H
 void read_into_memory();
 void pointer_memory_flip(int position,int bit_to_change);
-char* read_memory(int position, int bytes);
+int read_memory(int position, int bytes);
+int bytepush(int source, int dest);
+// char* read_memory_point(int position, int bytes);
 #endif
