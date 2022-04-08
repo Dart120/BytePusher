@@ -43,10 +43,10 @@ const int SCREEN_HEIGHT = 480;
             printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
         }
     }
-    char* mem = (char* ) malloc(sizeof(char) * MEM_SIZE);
-    mem[2] = 'n';
     
-    read_into_memory(mem);
+    
+    
+    read_into_memory();
     // print_mem(mem);
     // outer_loop();
     return 0;
