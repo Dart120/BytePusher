@@ -69,8 +69,8 @@ int bytepush(int source, int dest){
     *B = A;
     return 1;
 }
-void copy(int source, int dest){
-    
+char* point_to_screen(int start){
+    return memory + start;
 }
 // int main(){
 //     *memory = 0;

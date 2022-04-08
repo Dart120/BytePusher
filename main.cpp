@@ -9,15 +9,15 @@
 int main()
 {
     //Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int WINDOW_WIDTH = 256;
+const int SCREEN_HEIGHT = 256;
 
 //The window we'll be rendering to
     SDL_Window* window = NULL;
     
     //The surface contained by the window
-    SDL_Surface* screenSurface = NULL;
-
+   SDL_Surface* screenSurface = NULL;
+    SDL_Renderer* renderer = NULL;
     //Initialize SDL
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
@@ -25,19 +25,8 @@ const int SCREEN_HEIGHT = 480;
     }
     else
     {
-        //Create window
-        window = SDL_CreateWindow( "BytePusher", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-        //Get window surface
-            screenSurface = SDL_GetWindowSurface( window );
-
-            //Fill the surface white
-            SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) );
-            
-            //Update the surface
-            SDL_UpdateWindowSurface( window );
-
-            //Wait two seconds
-            // SDL_Delay( 2000 );
+        SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_WIDTH, 0, &window, &renderer);
+           
         if( window == NULL )
         {
             printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
@@ -48,6 +37,7 @@ const int SCREEN_HEIGHT = 480;
     
     read_into_memory();
     // print_mem(mem);
-    // outer_loop();
+    print(screenSurface == nullptr);
+    outer_loop(screenSurface,window,renderer);
     return 0;
 }

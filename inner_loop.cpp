@@ -2,6 +2,7 @@
 #include<iostream>
 #include "inner_loop.h"
 #include "memory.h"
+#include "print.hh"
 void inner_loop(int PC){
     int i = 65536;
     // PC is value of address
@@ -12,5 +13,5 @@ void inner_loop(int PC){
         }
         int C = read_memory(PC + 6, 3);
     }while(i--);
-    
+    print("inner done");
 }
