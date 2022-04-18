@@ -1,3 +1,5 @@
+#define FMT_HEADER_ONLY
+#include <fmt/core.h> 
 #include <iostream>
 #include <sys/stat.h>
 #include <fstream>
@@ -11,7 +13,8 @@
 using namespace std;
 // #define MEM_SIZE 4
 #define MEM_SIZE 16777216
-char* memory = (char* ) malloc(sizeof(char) * MEM_SIZE);
+char* memory = (char* ) malloc(sizeof(char) * MEM_SIZE + 1);
+
 
 void read_into_memory(){
     // struct stat results;
@@ -27,7 +30,7 @@ void read_into_memory(){
     // std::istreambuf_iterator<char>());
     // contents.c_str();
     std::ifstream infile;
-    infile.open("nyan.bp", std::ios::binary);
+    infile.open(input, std::ios::binary);
     infile.seekg(0, std::ios::end);
     size_t file_size_in_byte = infile.tellg();
     std::vector<char> data; // used to store text data
@@ -50,7 +53,8 @@ void pointer_memory_flip(int position,int bit_to_change){
     int added_pointer = bit_to_change/8;
     char bit = bit_to_change % 8;
     char* actual_pointer = pointer + added_pointer;
-    *actual_pointer |= 1UL << bit;
+    *actual_pointer ^= 1UL << bit;
+    print(fmt::format("{:b}", read_memory(0,2)));
 }
 // The number at a position
 int read_memory(int position, int bytes){
