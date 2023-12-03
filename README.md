@@ -1,4 +1,4 @@
 # BytePusher
-BytePusher Implementation in C++
-Install SDL2 and FMT
-run make && ./a.out
+BytePusher Implementation in C++<br>
+Install SDL2 and FMT<br>
+run make && ./a.out<br>
