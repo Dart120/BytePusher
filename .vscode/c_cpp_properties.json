@@ -19,7 +19,8 @@
                     "/Library/Frameworks/SDL2.framework/Versions/A/Headers"
                 ],
                 "limitSymbolsToIncludedHeaders": true
-            }
+            },
+            "configurationProvider": "ms-vscode.makefile-tools"
         },
         {
             "name": "SDL",
